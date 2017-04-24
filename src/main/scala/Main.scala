@@ -59,7 +59,9 @@ object Main {
   }
 
   def readDocument(directory: String, fileName: String): Document = {
-    val content = Source.fromFile(directory + "/" + fileName).getLines().toSeq.foldLeft("")((b,a) => b+a)
+    val file = Source.fromFile(directory + "/" + fileName)
+    val content = file.getLines().toSeq.foldLeft("")((b,a) => b+a)
+    file.close()
     Document(fileName, content)
   }
 

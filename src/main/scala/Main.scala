@@ -5,7 +5,7 @@ import scala.io.Source
 object Main {
   val reportersFile = "src/main/resources/reporters.txt"
   val reporters: Seq[String] = Source.fromFile(reportersFile).getLines().toSeq
-  val documentDirectory = "~/Downloads/446c8aa0-6eba-11e5-bc7f-4851b79b387c"
+  val documentDirectory = "/Users/joanna.chia/Downloads/446c8aa0-6eba-11e5-bc7f-4851b79b387c"
 
   def main(args: Array[String]) = {
     val outputFileName = "results.csv"
@@ -33,17 +33,17 @@ object Main {
     val rShorthand = """([0-9]+) (.*?),? at ([0-9]+(?!\w))""".r
     val citations = rCitation.findAllIn(doc.content).toSeq.map{
       m => m match {
-        case rCitation(vol, rep, page) => Citation(vol.toInt, rep, page.toInt)
+        case rCitation(vol, rep, page) => Citation(vol.toLong, rep, page.toLong)
       }
     }
     val pincities = rPincities.findAllIn(doc.content).toSeq.map {
       m => m match {
-        case rPincities(vol, rep, page, pin) => Citation(vol.toInt, rep, page.toInt, pin.toInt)
+        case rPincities(vol, rep, page, pin) => Citation(vol.toLong, rep, page.toLong, pin.toLong)
       }
     }
     val shortHand = rShorthand.findAllIn(doc.content).toSeq.map {
       m => m match {
-        case rShorthand(vol, rep, pin) => Citation(vol.toInt, rep, 0, pin.toInt)
+        case rShorthand(vol, rep, pin) => Citation(vol.toLong, rep, 0, pin.toLong)
       }
     }
 
@@ -79,6 +79,6 @@ object Main {
 }
 
 case class Document (name: String, content: String)
-case class Citation (volume: Int, reporter: String, page: Int, pinCities: Int = -1)
+case class Citation (volume: Long, reporter: String, page: Long, pinCities: Long = -1)
 
 

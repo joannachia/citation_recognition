@@ -1,5 +1,6 @@
 # citation_recognition
 
 to run:
-Change the `documentDirectory` in `Main.scala`:8 to the directory of your corpus
-In your CLI: `sbt run`
+
+1. Change the `documentDirectory` in `Main.scala`:8 to the directory of your corpus
+2. In your CLI: `sbt run`
